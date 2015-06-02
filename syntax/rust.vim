@@ -19,28 +19,20 @@ syn keyword   rustOperator    as
 syn match     rustAssert      "\<assert\(\w\)*!" contained
 syn match     rustPanic       "\<panic\(\w\)*!" contained
 syn keyword   rustKeyword     break
-syn keyword   rustKeyword     box nextgroup=rustBoxPlacement skipwhite skipempty
+syn keyword   rustKeyword     box
 syn keyword   rustKeyword     continue
-syn keyword   rustKeyword     extern nextgroup=rustExternCrate,rustObsoleteExternMod skipwhite skipempty
-syn keyword   rustKeyword     fn nextgroup=rustFuncName skipwhite skipempty
+syn keyword   rustKeyword     extern
+syn keyword   rustKeyword     fn
 syn keyword   rustKeyword     for in if impl let
 syn keyword   rustKeyword     loop pub
 syn keyword   rustKeyword     return super
 syn keyword   rustKeyword     unsafe where while
-syn keyword   rustKeyword     use nextgroup=rustModPath skipwhite skipempty
+syn keyword   rustKeyword     use
 " FIXME: Scoped impl's name is also fallen in this category
-syn keyword   rustKeyword     mod trait struct enum type nextgroup=rustIdentifier skipwhite skipempty
+syn keyword   rustKeyword     mod trait struct enum type
 syn keyword   rustStorage     move mut ref static const
 
-syn keyword   rustInvalidBareKeyword crate
-
-syn keyword   rustExternCrate crate contained nextgroup=rustIdentifier,rustExternCrateString skipwhite skipempty
-" This is to get the `bar` part of `extern crate "foo" as bar;` highlighting.
-syn match   rustExternCrateString /".*"\_s*as/ contained nextgroup=rustIdentifier skipwhite transparent skipempty contains=rustString,rustOperator
-syn keyword   rustObsoleteExternMod mod contained nextgroup=rustIdentifier skipwhite skipempty
-
-syn match     rustIdentifier  contains=rustIdentifierPrime "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
-syn match     rustFuncName    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
+syn keyword   rustExternCrate crate
 
 syn region    rustBoxPlacement matchgroup=rustBoxPlacementParens start="(" end=")" contains=TOP contained
 " Ideally we'd have syntax rules set up to match arbitrary expressions. Since
@@ -199,7 +191,6 @@ hi def link rustDecNumber       rustNumber
 hi def link rustHexNumber       rustNumber
 hi def link rustOctNumber       rustNumber
 hi def link rustBinNumber       rustNumber
-hi def link rustIdentifierPrime rustIdentifier
 hi def link rustTrait           rustType
 hi def link rustDeriveTrait     rustTrait
 
@@ -227,7 +218,6 @@ hi def link rustOperator      Operator
 hi def link rustKeyword       Keyword
 hi def link rustReservedKeyword Error
 hi def link rustConditional   Conditional
-hi def link rustIdentifier    Identifier
 hi def link rustCapsIdent     rustIdentifier
 hi def link rustModPath       Include
 hi def link rustModPathSep    Delimiter
